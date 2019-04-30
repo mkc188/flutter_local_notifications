@@ -81,10 +81,10 @@ typedef NS_ENUM(NSInteger, RepeatInterval) {
     FlutterLocalNotificationsPlugin* instance = [[FlutterLocalNotificationsPlugin alloc] init];
     headlessRunner = [[FlutterHeadlessDartRunner alloc] init];
     // callbackChannel = [FlutterMethodChannel methodChannelWithName:CALLBACK_CHANNEL binaryMessenger:headlessRunner];
-    if(@available(iOS 10.0, *)) {
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        center.delegate = instance;
-    }
+    // if(@available(iOS 10.0, *)) {
+    //     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    //     center.delegate = instance;
+    // }
     [registrar addApplicationDelegate:instance];
     [registrar addMethodCallDelegate:instance channel:channel];
     _registrar = registrar;
