@@ -1104,9 +1104,29 @@ public class FlutterLocalNotificationsPlugin implements MethodCallHandler, Plugi
 
     private void cancelNotification(Integer id) {
         Intent intent = new Intent(applicationContext, ScheduledNotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(applicationContext, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = getAlarmManager(applicationContext);
-        alarmManager.cancel(pendingIntent);
+
+				ArrayList<NotificationDetails> scheduledNotifications = loadScheduledNotifications(applicationContext);
+				if (scheduledNotifications != null && !scheduledNotifications.isEmpty()) {
+						boolean removed = false;
+						for (int i = 0; i < scheduledNotifications.size(); i++) {
+								NotificationDetails scheduledNotification = scheduledNotifications.get(i);
+								if (scheduledNotification.id.equals(id)) {
+										PendingIntent pendingIntent = PendingIntent
+												.getBroadcast(applicationContext, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+										AlarmManager alarmManager = getAlarmManager(applicationContext);
+										alarmManager.cancel(pendingIntent);
+										scheduledNotifications.remove(i);
+										removed = true;
+										break;
+								}
+						}
+
+						if (removed) {
+								saveScheduledNotifications(applicationContext, scheduledNotifications);
+						}
+				}
+
+
         NotificationManagerCompat notificationManager = getNotificationManager(applicationContext);
         notificationManager.cancel(id);
         removeNotificationFromCache(applicationContext, id);
