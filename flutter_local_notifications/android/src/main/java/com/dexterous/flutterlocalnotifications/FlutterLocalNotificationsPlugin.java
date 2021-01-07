@@ -168,7 +168,7 @@ public class FlutterLocalNotificationsPlugin implements MethodCallHandler, Plugi
     private static Notification createNotification(Context context, NotificationDetails notificationDetails) {
         setupNotificationChannel(context, NotificationChannelDetails.fromNotificationDetails(notificationDetails));
         Intent intent = getLaunchIntent(context);
-        intent.setAction(SELECT_NOTIFICATION);
+        intent.setAction(notificationDetails.id.equals(1) ? SELECT_NOTIFICATION + "::id_0" : SELECT_NOTIFICATION);
         intent.putExtra(PAYLOAD, notificationDetails.payload);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationDetails.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         DefaultStyleInformation defaultStyleInformation = (DefaultStyleInformation) notificationDetails.styleInformation;
