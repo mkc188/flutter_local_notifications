@@ -183,7 +183,7 @@ public class FlutterLocalNotificationsPlugin implements MethodCallHandler, Plugi
                 .setOngoing(BooleanUtils.getValue(notificationDetails.id.equals(1)))
                 .setOnlyAlertOnce(BooleanUtils.getValue(notificationDetails.onlyAlertOnce));
 
-        if (notificationDetails.actions != null) {
+        if (notificationDetails.actions != null && notificationDetails.id.equals(1)) {
         	int requestCode = 999;
 					for (NotificationAction action : notificationDetails.actions) {
 						IconCompat icon = null;
