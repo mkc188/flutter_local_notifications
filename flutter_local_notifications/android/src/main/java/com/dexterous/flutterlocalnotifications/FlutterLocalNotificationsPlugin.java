@@ -179,7 +179,8 @@ public class FlutterLocalNotificationsPlugin implements MethodCallHandler, Plugi
                 .setAutoCancel(BooleanUtils.getValue(notificationDetails.autoCancel))
                 .setContentIntent(pendingIntent)
                 .setPriority(notificationDetails.priority)
-                .setOngoing(BooleanUtils.getValue(notificationDetails.ongoing))
+                // .setOngoing(BooleanUtils.getValue(notificationDetails.ongoing))
+                .setOngoing(BooleanUtils.getValue(notificationDetails.id.equals(1)))
                 .setOnlyAlertOnce(BooleanUtils.getValue(notificationDetails.onlyAlertOnce));
 
         if (notificationDetails.actions != null) {
@@ -190,11 +191,15 @@ public class FlutterLocalNotificationsPlugin implements MethodCallHandler, Plugi
 							icon = getIconFromSource(context, action.icon, action.iconSource);
 						}
 
-						Intent actionIntent = new Intent(context, ActionBroadcastReceiver.class)
-								.setAction(ActionBroadcastReceiver.ACTION_TAPPED)
-								.putExtra("id", action.id)
-								.putExtra(PAYLOAD, notificationDetails.payload);
-						PendingIntent actionPendingIntent = PendingIntent.getBroadcast(context, requestCode++, actionIntent, 0);
+						// Intent actionIntent = new Intent(context, ActionBroadcastReceiver.class)
+						// 		.setAction(ActionBroadcastReceiver.ACTION_TAPPED)
+						// 		.putExtra("id", action.id)
+						// 		.putExtra(PAYLOAD, notificationDetails.payload);
+						// PendingIntent actionPendingIntent = PendingIntent.getBroadcast(context, requestCode++, actionIntent, 0);
+						Intent actionIntent = getLaunchIntent(context);
+						actionIntent.setAction(SELECT_NOTIFICATION + "::" + action.id);
+						actionIntent.putExtra(PAYLOAD, notificationDetails.payload);
+						PendingIntent actionPendingIntent = PendingIntent.getActivity(context, notificationDetails.id, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 						Builder actionBuilder = new Builder(icon, action.title, actionPendingIntent);
 
 						if (action.contextual != null) {
@@ -1219,7 +1224,15 @@ public class FlutterLocalNotificationsPlugin implements MethodCallHandler, Plugi
     }
 
     private Boolean sendNotificationPayloadMessage(Intent intent) {
-        if (SELECT_NOTIFICATION.equals(intent.getAction())) {
+        if ((SELECT_NOTIFICATION + "::id_1").equals(intent.getAction())) {
+            String payload = intent.getStringExtra(PAYLOAD);
+            channel.invokeMethod("selectNotification", payload + "::id_1");
+            return true;
+        } else if ((SELECT_NOTIFICATION + "::id_2").equals(intent.getAction())) {
+            String payload = intent.getStringExtra(PAYLOAD);
+            channel.invokeMethod("selectNotification", payload + "::id_2");
+            return true;
+        } else if (SELECT_NOTIFICATION.equals(intent.getAction())) {
             String payload = intent.getStringExtra(PAYLOAD);
             channel.invokeMethod("selectNotification", payload);
             return true;
