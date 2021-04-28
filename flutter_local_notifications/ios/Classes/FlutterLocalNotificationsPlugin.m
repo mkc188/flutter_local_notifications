@@ -889,26 +889,6 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
             _launchingAppFromNotification = true;
         }
         completionHandler();
-    } else if (response.actionIdentifier != nil) {        
-        if (!actionEventSink) {
-            actionEventSink = [[ActionEventSink alloc] init];
-        }
-        
-        NSString *text = @"";
-        if ([response respondsToSelector:@selector(userText)]) {
-            text = [(UNTextInputNotificationResponse*) response userText];
-        }
-        
-        [actionEventSink addItem:@{
-            @"id": response.actionIdentifier,
-            @"input": text,
-            @"payload": response.notification.request.content.userInfo[@"payload"],
-        }];
-        
-        
-        [self startEngineIfNeeded];
-        
-        completionHandler();
     }
 }
 
