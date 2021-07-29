@@ -198,7 +198,7 @@ class FlutterLocalNotificationsPlugin {
               notificationDetails: notificationDetails?.macOS,
               payload: payload);
     } else {
-      await FlutterLocalNotificationsPlatform.instance?.show(id, title, body);
+      await FlutterLocalNotificationsPlatform?.instance.show(id, title, body);
     }
   }
 
@@ -207,7 +207,7 @@ class FlutterLocalNotificationsPlugin {
   /// This applies to notifications that have been scheduled and those that
   /// have already been presented.
   Future<void> cancel(int id) async {
-    await FlutterLocalNotificationsPlatform.instance?.cancel(id);
+    await FlutterLocalNotificationsPlatform?.instance.cancel(id);
   }
 
   /// Cancels/removes all notifications.
@@ -215,7 +215,7 @@ class FlutterLocalNotificationsPlugin {
   /// This applies to notifications that have been scheduled and those that
   /// have already been presented.
   Future<void> cancelAll() async {
-    await FlutterLocalNotificationsPlatform.instance?.cancelAll();
+    await FlutterLocalNotificationsPlatform?.instance.cancelAll();
   }
 
   /// Schedules a notification to be shown at the specified date and time.
@@ -238,12 +238,12 @@ class FlutterLocalNotificationsPlugin {
       await resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()!
           .schedule(
-              id, title, body, scheduledDate, notificationDetails?.android,
+              id, title, body, scheduledDate, notificationDetails.android,
               payload: payload, androidAllowWhileIdle: androidAllowWhileIdle);
     } else if (_platform.isIOS) {
       await resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
-          ?.schedule(id, title, body, scheduledDate, notificationDetails?.iOS,
+          ?.schedule(id, title, body, scheduledDate, notificationDetails.iOS,
               payload: payload);
     } else if (_platform.isMacOS) {
       throw UnimplementedError();
@@ -298,7 +298,7 @@ class FlutterLocalNotificationsPlugin {
       await resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()!
           .zonedSchedule(
-              id, title, body, scheduledDate, notificationDetails?.android,
+              id, title, body, scheduledDate, notificationDetails.android,
               payload: payload,
               androidAllowWhileIdle: androidAllowWhileIdle,
               matchDateComponents: matchDateTimeComponents);
@@ -306,7 +306,7 @@ class FlutterLocalNotificationsPlugin {
       await resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
           ?.zonedSchedule(
-              id, title, body, scheduledDate, notificationDetails?.iOS,
+              id, title, body, scheduledDate, notificationDetails.iOS,
               uiLocalNotificationDateInterpretation:
                   uiLocalNotificationDateInterpretation,
               payload: payload,
@@ -315,7 +315,7 @@ class FlutterLocalNotificationsPlugin {
       await resolvePlatformSpecificImplementation<
               MacOSFlutterLocalNotificationsPlugin>()
           ?.zonedSchedule(
-              id, title, body, scheduledDate, notificationDetails?.macOS,
+              id, title, body, scheduledDate, notificationDetails.macOS,
               payload: payload,
               matchDateTimeComponents: matchDateTimeComponents);
     }
@@ -433,5 +433,5 @@ class FlutterLocalNotificationsPlugin {
 
   /// Returns a list of notifications pending to be delivered/shown.
   Future<List<PendingNotificationRequest>> pendingNotificationRequests() =>
-      FlutterLocalNotificationsPlatform.instance.pendingNotificationRequests();
+      FlutterLocalNotificationsPlatform?.instance.pendingNotificationRequests();
 }
