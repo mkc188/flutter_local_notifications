@@ -1902,7 +1902,7 @@ void main() {
           'ledColorGreen': null,
           'ledColorBlue': null,
           'channelAction':
-              AndroidNotificationChannelAction.createIfNotExists?.index,
+              AndroidNotificationChannelAction.createIfNotExists.index,
         })
       ]);
     });

@@ -56,7 +56,7 @@ extension AndroidNotificationChannelMapper on AndroidNotificationChannel {
         'ledColorGreen': ledColor?.green,
         'ledColorBlue': ledColor?.blue,
         'channelAction':
-            AndroidNotificationChannelAction.createIfNotExists?.index,
+            AndroidNotificationChannelAction.createIfNotExists.index,
       }..addAll(_convertNotificationSoundToMap(sound));
 }
 
