@@ -17,7 +17,7 @@ class MessagingStyleInformation extends DefaultStyleInformation {
         super(htmlFormatContent, htmlFormatTitle);
 
   /// The person displayed for any messages that are sent by the user.
-  final Person person;
+  final Person? person;
 
   /// The title to be displayed on this conversation.
   final String? conversationTitle;

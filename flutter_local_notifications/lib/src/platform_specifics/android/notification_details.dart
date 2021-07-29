@@ -294,7 +294,7 @@ class AndroidNotificationDetails {
   ///
   /// Defaults to creating the notification channel using the provided details
   /// if it doesn't exist
-  final AndroidNotificationChannelAction channelAction;
+  final AndroidNotificationChannelAction? channelAction;
 
   /// Defines the notification visibility on the lockscreen.
   final NotificationVisibility? visibility;

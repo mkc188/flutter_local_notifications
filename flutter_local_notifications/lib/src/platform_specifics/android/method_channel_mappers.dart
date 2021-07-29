@@ -188,7 +188,7 @@ extension InboxStyleInformationMapper on InboxStyleInformation {
       'htmlFormatContentTitle': htmlFormatContentTitle,
       'summaryText': summaryText,
       'htmlFormatSummaryText': htmlFormatSummaryText,
-      'lines': lines ?? <String>[],
+      'lines': lines,
       'htmlFormatLines': htmlFormatLines
     });
 }
@@ -200,8 +200,8 @@ extension MessagingStyleInformationMapper on MessagingStyleInformation {
       'conversationTitle': conversationTitle,
       'groupConversation': groupConversation,
       'messages': messages
-          ?.map((m) => m?.toMap()) // ignore: always_specify_types
-          ?.toList()
+          ?.map((m) => m.toMap()) // ignore: always_specify_types
+          .toList()
     });
 }
 

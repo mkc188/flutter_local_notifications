@@ -286,7 +286,7 @@ class FlutterLocalNotificationsPlugin {
     String title,
     String body,
     TZDateTime scheduledDate,
-    NotificationDetails notificationDetails, {
+    NotificationDetails? notificationDetails, {
     required
         UILocalNotificationDateInterpretation
             uiLocalNotificationDateInterpretation,
@@ -298,7 +298,7 @@ class FlutterLocalNotificationsPlugin {
       await resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()!
           .zonedSchedule(
-              id, title, body, scheduledDate, notificationDetails.android,
+              id, title, body, scheduledDate, notificationDetails?.android,
               payload: payload,
               androidAllowWhileIdle: androidAllowWhileIdle,
               matchDateComponents: matchDateTimeComponents);
@@ -306,7 +306,7 @@ class FlutterLocalNotificationsPlugin {
       await resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
           ?.zonedSchedule(
-              id, title, body, scheduledDate, notificationDetails.iOS,
+              id, title, body, scheduledDate, notificationDetails?.iOS,
               uiLocalNotificationDateInterpretation:
                   uiLocalNotificationDateInterpretation,
               payload: payload,
@@ -315,7 +315,7 @@ class FlutterLocalNotificationsPlugin {
       await resolvePlatformSpecificImplementation<
               MacOSFlutterLocalNotificationsPlugin>()
           ?.zonedSchedule(
-              id, title, body, scheduledDate, notificationDetails.macOS,
+              id, title, body, scheduledDate, notificationDetails?.macOS,
               payload: payload,
               matchDateTimeComponents: matchDateTimeComponents);
     }
@@ -340,7 +340,7 @@ class FlutterLocalNotificationsPlugin {
     String title,
     String body,
     RepeatInterval repeatInterval,
-    NotificationDetails notificationDetails, {
+    NotificationDetails? notificationDetails, {
     String? payload,
     bool androidAllowWhileIdle = false,
   }) async {
@@ -348,19 +348,19 @@ class FlutterLocalNotificationsPlugin {
       await resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
           ?.periodicallyShow(id, title, body, repeatInterval,
-              notificationDetails: notificationDetails.android,
+              notificationDetails: notificationDetails?.android,
               payload: payload,
               androidAllowWhileIdle: androidAllowWhileIdle);
     } else if (_platform.isIOS) {
       await resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
           ?.periodicallyShow(id, title, body, repeatInterval,
-              notificationDetails: notificationDetails.iOS, payload: payload);
+              notificationDetails: notificationDetails?.iOS, payload: payload);
     } else if (_platform.isMacOS) {
       await resolvePlatformSpecificImplementation<
               MacOSFlutterLocalNotificationsPlugin>()
           ?.periodicallyShow(id, title, body, repeatInterval,
-              notificationDetails: notificationDetails.macOS,
+              notificationDetails: notificationDetails?.macOS,
               payload: payload);
     } else {
       await FlutterLocalNotificationsPlatform.instance
@@ -411,7 +411,7 @@ class FlutterLocalNotificationsPlugin {
     String body,
     Day day,
     Time notificationTime,
-    NotificationDetails notificationDetails, {
+    NotificationDetails? notificationDetails, {
     String? payload,
   }) async {
     if (_platform.isAndroid) {
