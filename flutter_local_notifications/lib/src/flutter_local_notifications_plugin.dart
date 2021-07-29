@@ -364,7 +364,7 @@ class FlutterLocalNotificationsPlugin {
               payload: payload);
     } else {
       await FlutterLocalNotificationsPlatform.instance
-          ?.periodicallyShow(id, title, body, repeatInterval);
+          .periodicallyShow(id, title, body, repeatInterval);
     }
   }
 
