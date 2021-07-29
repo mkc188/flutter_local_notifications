@@ -12,7 +12,7 @@ import 'package:timezone/timezone.dart' as tz;
 void main() {
   // TODO(maikub): add tests for `periodicallyShow` after https://github.com/dart-lang/sdk/issues/28985 is resolved
   TestWidgetsFlutterBinding.ensureInitialized();
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   group('Android', () {
     const MethodChannel channel =
@@ -25,15 +25,15 @@ void main() {
       // ignore: always_specify_types
       channel.setMockMethodCallHandler((methodCall) async {
         log.add(methodCall);
-        if (methodCall.method == 'pendingNotificationRequests') {
-          return Future<List<Map<String, Object>>>.value(
-              <Map<String, Object>>[]);
-        } else if (methodCall.method == 'getNotificationAppLaunchDetails') {
-          return Future<Map<String, Object>>.value(<String, Object>{});
-        } else if (methodCall.method == 'getActiveNotifications') {
-          return Future<List<Map<String, Object>>>.value(
-              <Map<String, Object>>[]);
-        }
+        // if (methodCall.method == 'pendingNotificationRequests') {
+        //   return Future<List<Map<String, Object>>>.value(
+        //       <Map<String, Object>>[]);
+        // } else if (methodCall.method == 'getNotificationAppLaunchDetails') {
+        //   return Future<Map<String, Object>>.value(<String, Object>{});
+        // } else if (methodCall.method == 'getActiveNotifications') {
+        //   return Future<List<Map<String, Object>>>.value(
+        //       <Map<String, Object>>[]);
+        // }
         return Future<void>.value();
       });
     });
@@ -65,7 +65,7 @@ void main() {
           1, 'notification title', 'notification body', null);
       expect(
           log.last,
-          isMethodCall('show', arguments: <String, Object>{
+          isMethodCall('show', arguments: <String, Object?>{
             'id': 1,
             'title': 'notification title',
             'body': 'notification body',
@@ -96,7 +96,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -173,7 +173,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -252,7 +252,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -330,7 +330,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -411,7 +411,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -493,7 +493,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -576,7 +576,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -659,7 +659,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -704,7 +704,7 @@ void main() {
               'fullScreenIntent': false,
               'shortcutId': null,
               'style': AndroidNotificationStyle.bigPicture.index,
-              'styleInformation': <String, Object>{
+              'styleInformation': <String, Object?>{
                 'htmlFormatContent': false,
                 'htmlFormatTitle': false,
                 'bigPicture': 'bigPictureDrawable',
@@ -757,7 +757,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -849,7 +849,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -894,7 +894,7 @@ void main() {
               'fullScreenIntent': false,
               'shortcutId': null,
               'style': AndroidNotificationStyle.bigPicture.index,
-              'styleInformation': <String, Object>{
+              'styleInformation': <String, Object?>{
                 'htmlFormatContent': false,
                 'htmlFormatTitle': false,
                 'bigPicture': 'bigPictureFilePath',
@@ -947,7 +947,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -1037,7 +1037,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -1082,7 +1082,7 @@ void main() {
               'fullScreenIntent': false,
               'shortcutId': null,
               'style': AndroidNotificationStyle.inbox.index,
-              'styleInformation': <String, Object>{
+              'styleInformation': <String, Object?>{
                 'htmlFormatContent': false,
                 'htmlFormatTitle': false,
                 'lines': <String>['line1'],
@@ -1131,7 +1131,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -1216,7 +1216,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -1298,7 +1298,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -1387,7 +1387,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -1432,10 +1432,10 @@ void main() {
               'fullScreenIntent': false,
               'shortcutId': null,
               'style': AndroidNotificationStyle.messaging.index,
-              'styleInformation': <String, Object>{
+              'styleInformation': <String, Object?>{
                 'htmlFormatContent': false,
                 'htmlFormatTitle': false,
-                'person': <String, Object>{
+                'person': <String, Object?>{
                   'bot': null,
                   'important': null,
                   'key': null,
@@ -1444,8 +1444,8 @@ void main() {
                 },
                 'conversationTitle': null,
                 'groupConversation': null,
-                'messages': <Map<String, Object>>[
-                  <String, Object>{
+                'messages': <Map<String, Object?>>[
+                  <String, Object?>{
                     'text': 'message 1',
                     'timestamp': messageDateTime.millisecondsSinceEpoch,
                     'person': null,
@@ -1505,7 +1505,7 @@ void main() {
             'title': 'notification title',
             'body': 'notification body',
             'payload': '',
-            'platformSpecifics': <String, Object>{
+            'platformSpecifics': <String, Object?>{
               'icon': null,
               'channelId': 'channelId',
               'channelName': 'channelName',
@@ -1564,8 +1564,8 @@ void main() {
                 },
                 'conversationTitle': 'conversationTitle',
                 'groupConversation': true,
-                'messages': <Map<String, Object>>[
-                  <String, Object>{
+                'messages': <Map<String, Object?>>[
+                  <String, Object?>{
                     'text': 'message 1',
                     'timestamp': messageDateTime.millisecondsSinceEpoch,
                     'person': null,
@@ -1611,7 +1611,7 @@ void main() {
               'payload': '',
               'timeZoneName': 'Australia/Sydney',
               'scheduledDateTime': _convertDateToISO8601String(scheduledDate),
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'allowWhileIdle': true,
                 'icon': null,
                 'channelId': 'channelId',
@@ -1700,7 +1700,7 @@ void main() {
               'timeZoneName': 'Australia/Sydney',
               'scheduledDateTime': _convertDateToISO8601String(scheduledDate),
               'matchDateTimeComponents': DateTimeComponents.time.index,
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'allowWhileIdle': true,
                 'icon': null,
                 'channelId': 'channelId',
@@ -1790,7 +1790,7 @@ void main() {
               'scheduledDateTime': _convertDateToISO8601String(scheduledDate),
               'matchDateTimeComponents':
                   DateTimeComponents.dayOfWeekAndTime.index,
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'allowWhileIdle': true,
                 'icon': null,
                 'channelId': 'channelId',
@@ -1849,12 +1849,12 @@ void main() {
       test('without description', () async {
         await flutterLocalNotificationsPlugin
             .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin>()
+                AndroidFlutterLocalNotificationsPlugin>()!
             .createNotificationChannelGroup(
                 const AndroidNotificationChannelGroup('groupId', 'groupName'));
         expect(log, <Matcher>[
           isMethodCall('createNotificationChannelGroup',
-              arguments: <String, Object>{
+              arguments: <String, Object?>{
                 'id': 'groupId',
                 'name': 'groupName',
                 'description': null,
@@ -1864,7 +1864,7 @@ void main() {
       test('with description', () async {
         await flutterLocalNotificationsPlugin
             .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin>()
+                AndroidFlutterLocalNotificationsPlugin>()!
             .createNotificationChannelGroup(
                 const AndroidNotificationChannelGroup('groupId', 'groupName',
                     description: 'groupDescription'));
@@ -1882,11 +1882,11 @@ void main() {
     test('createNotificationChannel with default settings', () async {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+              AndroidFlutterLocalNotificationsPlugin>()!
           .createNotificationChannel(const AndroidNotificationChannel(
               'channelId', 'channelName', 'channelDescription'));
       expect(log, <Matcher>[
-        isMethodCall('createNotificationChannel', arguments: <String, Object>{
+        isMethodCall('createNotificationChannel', arguments: <String, Object?>{
           'id': 'channelId',
           'name': 'channelName',
           'description': 'channelDescription',
@@ -1910,7 +1910,7 @@ void main() {
     test('createNotificationChannel with non-default settings', () async {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+              AndroidFlutterLocalNotificationsPlugin>()!
           .createNotificationChannel(const AndroidNotificationChannel(
             'channelId',
             'channelName',
@@ -1924,7 +1924,7 @@ void main() {
             ledColor: Color.fromARGB(255, 255, 0, 0),
           ));
       expect(log, <Matcher>[
-        isMethodCall('createNotificationChannel', arguments: <String, Object>{
+        isMethodCall('createNotificationChannel', arguments: <String, Object?>{
           'id': 'channelId',
           'name': 'channelName',
           'description': 'channelDescription',
@@ -1948,7 +1948,7 @@ void main() {
     test('deleteNotificationChannel', () async {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+              AndroidFlutterLocalNotificationsPlugin>()!
           .deleteNotificationChannel('channelId');
       expect(log, <Matcher>[
         isMethodCall('deleteNotificationChannel', arguments: 'channelId')
@@ -1958,7 +1958,7 @@ void main() {
     test('getActiveNotifications', () async {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+              AndroidFlutterLocalNotificationsPlugin>()!
           .getActiveNotifications();
       expect(log,
           <Matcher>[isMethodCall('getActiveNotifications', arguments: null)]);
@@ -1985,7 +1985,7 @@ void main() {
       debugDefaultTargetPlatformOverride = TargetPlatform.android;
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+              AndroidFlutterLocalNotificationsPlugin>()!
           .getActiveNotifications();
       expect(log,
           <Matcher>[isMethodCall('getActiveNotifications', arguments: null)]);
@@ -2177,7 +2177,7 @@ void main() {
           1, 'notification title', 'notification body', null);
       expect(
           log.last,
-          isMethodCall('show', arguments: <String, Object>{
+          isMethodCall('show', arguments: <String, Object?>{
             'id': 1,
             'title': 'notification title',
             'body': 'notification body',
@@ -2281,7 +2281,7 @@ void main() {
                   UILocalNotificationDateInterpretation.absoluteTime.index,
               'scheduledDateTime': _convertDateToISO8601String(scheduledDate),
               'timeZoneName': 'Australia/Sydney',
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'presentAlert': true,
                 'presentBadge': true,
                 'presentSound': true,
@@ -2345,7 +2345,7 @@ void main() {
               'scheduledDateTime': _convertDateToISO8601String(scheduledDate),
               'timeZoneName': 'Australia/Sydney',
               'matchDateTimeComponents': DateTimeComponents.time.index,
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'presentAlert': true,
                 'presentBadge': true,
                 'presentSound': true,
@@ -2410,7 +2410,7 @@ void main() {
               'timeZoneName': 'Australia/Sydney',
               'matchDateTimeComponents':
                   DateTimeComponents.dayOfWeekAndTime.index,
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'presentAlert': true,
                 'presentBadge': true,
                 'presentSound': true,
@@ -2431,10 +2431,10 @@ void main() {
     test('requestPermissions with default settings', () async {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin>()
+              IOSFlutterLocalNotificationsPlugin>()!
           .requestPermissions();
       expect(log, <Matcher>[
-        isMethodCall('requestPermissions', arguments: <String, Object>{
+        isMethodCall('requestPermissions', arguments: <String, Object?>{
           'sound': null,
           'badge': null,
           'alert': null,
@@ -2444,7 +2444,7 @@ void main() {
     test('requestPermissions with all settings requested', () async {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin>()
+              IOSFlutterLocalNotificationsPlugin>()!
           .requestPermissions(sound: true, badge: true, alert: true);
       expect(log, <Matcher>[
         isMethodCall('requestPermissions', arguments: <String, Object>{
@@ -2556,7 +2556,7 @@ void main() {
           1, 'notification title', 'notification body', null);
       expect(
           log.last,
-          isMethodCall('show', arguments: <String, Object>{
+          isMethodCall('show', arguments: <String, Object?>{
             'id': 1,
             'title': 'notification title',
             'body': 'notification body',
@@ -2654,7 +2654,7 @@ void main() {
               'payload': '',
               'scheduledDateTime': _convertDateToISO8601String(scheduledDate),
               'timeZoneName': 'Australia/Sydney',
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'subtitle': null,
                 'presentAlert': true,
                 'presentBadge': true,
@@ -2715,7 +2715,7 @@ void main() {
               'scheduledDateTime': _convertDateToISO8601String(scheduledDate),
               'timeZoneName': 'Australia/Sydney',
               'matchDateTimeComponents': DateTimeComponents.time.index,
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'subtitle': null,
                 'presentAlert': true,
                 'presentBadge': true,
@@ -2777,7 +2777,7 @@ void main() {
               'timeZoneName': 'Australia/Sydney',
               'matchDateTimeComponents':
                   DateTimeComponents.dayOfWeekAndTime.index,
-              'platformSpecifics': <String, Object>{
+              'platformSpecifics': <String, Object?>{
                 'subtitle': null,
                 'presentAlert': true,
                 'presentBadge': true,
@@ -2798,10 +2798,10 @@ void main() {
     test('requestPermissions with default settings', () async {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              MacOSFlutterLocalNotificationsPlugin>()
+              MacOSFlutterLocalNotificationsPlugin>()!
           .requestPermissions();
       expect(log, <Matcher>[
-        isMethodCall('requestPermissions', arguments: <String, Object>{
+        isMethodCall('requestPermissions', arguments: <String, Object?>{
           'sound': null,
           'badge': null,
           'alert': null,
@@ -2811,7 +2811,7 @@ void main() {
     test('requestPermissions with all settings requested', () async {
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-              MacOSFlutterLocalNotificationsPlugin>()
+              MacOSFlutterLocalNotificationsPlugin>()!
           .requestPermissions(sound: true, badge: true, alert: true);
       expect(log, <Matcher>[
         isMethodCall('requestPermissions', arguments: <String, Object>{

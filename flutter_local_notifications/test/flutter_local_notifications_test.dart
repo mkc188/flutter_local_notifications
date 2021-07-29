@@ -14,7 +14,7 @@ void main() {
   test(
       'Throws assertion error when creating an IOSNotificationAttachment with '
       'no file path', () {
-    expect(() => IOSNotificationAttachment(null), throwsAssertionError);
+    expect(() => IOSNotificationAttachment(''), throwsAssertionError);
   });
 
   test('Creates IOSNotificationAttachment when file path is specified', () {

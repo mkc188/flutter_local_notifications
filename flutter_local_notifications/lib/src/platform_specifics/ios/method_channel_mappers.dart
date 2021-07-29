@@ -7,7 +7,7 @@ import 'notification_details.dart';
 // ignore_for_file: public_member_api_docs
 
 extension IOSNotificationActionMapper on IOSNotificationAction {
-  Map<String, Object> toMap() => <String, Object>{
+  Map<String, Object?> toMap() => <String, Object?>{
         'identifier': identifier,
         'title': title,
         'options': options
@@ -39,9 +39,7 @@ extension IOSInitializationSettingsMapper on IOSInitializationSettings {
         'defaultPresentAlert': defaultPresentAlert,
         'defaultPresentSound': defaultPresentSound,
         'defaultPresentBadge': defaultPresentBadge,
-        'notificationCategories': notificationCategories
-            ?.map((e) => e.toMap()) // ignore: always_specify_types
-            ?.toList(),
+        'notificationCategories': notificationCategories,
       };
 }
 
@@ -53,7 +51,7 @@ extension IOSNotificationAttachmentMapper on IOSNotificationAttachment {
 }
 
 extension IOSNotificationDetailsMapper on IOSNotificationDetails {
-  Map<String, Object> toMap() => <String, Object>{
+  Map<String, Object?> toMap() => <String, Object?>{
         'presentAlert': presentAlert,
         'presentSound': presentSound,
         'presentBadge': presentBadge,
